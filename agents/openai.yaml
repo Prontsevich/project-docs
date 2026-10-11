@@ -1,0 +1,4 @@
+interface:
+  display_name: "Project Documentation"
+  short_description: "Set up and maintain a coherent project documentation system"
+  default_prompt: "Use $project-docs to inspect this project and set up or adapt its documentation, preserving useful existing conventions."
