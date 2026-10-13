@@ -116,7 +116,8 @@ unless the user asks.
 ## 5. Report
 
 State the tracker, the role mapping, roles left unmapped, automations that need
-attention, and files written. The user can edit `docs/agents/tracker.md`
+attention, and files written. `change` and `execute-tasks` now read the adapter
+for intake, status transitions, and acceptance. The user can edit `docs/agents/tracker.md`
 directly later; re-run this skill to switch trackers or rebuild the mapping.
 
 The setup process and the role-mapping table are adapted from

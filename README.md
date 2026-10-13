@@ -20,8 +20,9 @@ Agent Skills format.
 The skills form one flow, `change` → `execute-tasks` → `project-docs`, and each
 also works on its own.
 
-`change` and `execute-tasks` currently assume Linear for work tracking; moving
-them onto the tracker adapter is the next step.
+`change` and `execute-tasks` read the tracker adapter written by
+`setup-tracker`. Without one, they keep work local and ask you to run
+`/setup-tracker` before writing to a remote tracker.
 
 ## Acknowledgements
 

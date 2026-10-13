@@ -19,32 +19,42 @@ living docs, standards, code, tests, and linked design material. Honor
 repository-required exploration tools such as graphify before broad code reads.
 Do not assume that a harness has loaded project rules for you.
 
-Use existing repository templates and routing. Read `.codex/change.md` if it
-exists or another adapter is explicitly routed by repository guidance.
-An adapter is optional; do not create one just to run this skill. A capability
-registry is an optional living contract anchor, not a prerequisite. Do not
-invent a capability stub, templates, or a documentation hierarchy as incidental
-planning work.
+Use existing repository templates and routing. Read the skill adapter
+`.codex/change.md` if it exists, or another one explicitly routed by repository
+guidance. A skill adapter is optional; do not create one just to run this skill.
+A capability registry is an optional living contract anchor, not a prerequisite.
+Do not invent a capability stub, templates, or a documentation hierarchy as
+incidental planning work.
 
 ## Resolve the work source
 
-An explicit user request, shaped issue, or selected fallback backlog item
+An explicit user request, shaped tracker item, or selected local backlog entry
 supplies intent, scope, priority, dependencies, and acceptance.
 
-- With configured, available Linear, keep intake and live work state there.
-  Refer to issue criteria instead of maintaining a second live tracker.
-- Without configured Linear, use the existing `docs/backlog.md` format when
-  persistent intake is needed. A direct request need not first become a
-  backlog item.
-- During a configured Linear outage, continue authorized local planning from
-  available context. Record pending synchronization locally using the Linear
-  skill/repository convention; do not silently switch the canonical tracker,
-  fabricate remote state, or maintain two trackers after reconnection.
+Read the tracker adapter `docs/agents/tracker.md` when it exists. It names the
+canonical tracker, maps the roles (`intake`, `ready`, `in-review`, …) and verbs
+(`find`, `fetch`, `capture`, …) used here to this project's statuses and
+operations, and sets the rules for every tracker write. A local Markdown
+tracker is configured the same way; its backlog is then the tracker, not a
+fallback.
 
-The Linear operating skill owns intake, shaping, readiness gates, placement,
-and acceptance semantics. This skill consumes that contract; it does not
-create projects, issue-per-phase subtasks, or status transitions automatically.
-Only synchronize a tracker when requested or already authorized.
+- With an available tracker, keep intake and live work state there. `fetch`
+  the item and refer to its acceptance criteria instead of maintaining a second
+  live tracker. `find` before `capture`.
+- A direct request need not first become a tracker item or backlog entry.
+- Without a tracker adapter, use the existing `docs/backlog.md` format when
+  persistent intake is needed. If the repository documents a remote tracker
+  but has no tracker adapter, continue local planning and do not guess its
+  statuses or operations; mention `/setup-tracker` only when a tracker write is
+  due, and ask the user to run it.
+- During an outage, follow the tracker adapter's fallback: continue authorized
+  local planning, record pending synchronization locally, never fabricate
+  remote state, and do not maintain two trackers after reconnection.
+
+The tracker's own workflow, as mapped by the tracker adapter, owns intake,
+readiness, placement, and acceptance. This skill consumes that contract; it
+does not create containers, per-phase child items, or status transitions
+automatically. Only write to a tracker when requested or already authorized.
 
 ## Investigate and frame
 
@@ -90,7 +100,7 @@ Use the existing template or include only the applicable parts:
   integration, deployment, or user acceptance.
 - Living-document impact and canonical homes for durable knowledge.
 
-Issue acceptance remains canonical in the tracker. A plan can record a dated
+Item acceptance remains canonical in the tracker. A plan can record a dated
 acceptance snapshot or technical decomposition with its source; label it as
 such rather than pretending it is independently maintained issue state.
 Keep private tracker identifiers out of public artifacts.
@@ -99,9 +109,9 @@ Index a new plan in `docs/plans/README.md` under the repository's convention.
 Folder is execution state, not approval: a planned plan is not implicitly
 approved, and an unstarted plan must not sit in `active/`.
 
-In fallback mode, reconcile an existing backlog line when a plan is created
-according to local rules: a queue-only backlog retires the line at that boundary;
-other repositories may retain a link. Do not silently lose an unplanned
+With a local backlog, reconcile its entry when a plan is created according to
+the tracker adapter, or local rules without one: link the plan from the entry,
+or retire the line in a queue-only backlog. Do not silently lose an unplanned
 remainder of the request.
 
 Do not update living contracts as though proposed behavior has shipped.

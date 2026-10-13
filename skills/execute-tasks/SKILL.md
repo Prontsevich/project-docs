@@ -11,21 +11,27 @@ product, perform intake, or invent work to fill a batch.
 
 ## Load inputs and repository guidance
 
+Read the tracker adapter `docs/agents/tracker.md` when it exists: it names the
+tracker, maps the roles used here (`intake`, `ready`, `in-progress`,
+`in-review`, `done`) to this project's statuses, and defines the verbs
+(`fetch`, `transition`, `comment`, `capture`) and the rules for every tracker
+write. A connected workspace alone does not configure this repository.
+
 Resolve the source in order:
 
 1. An explicit plan path, issue, ordered task list, or previously selected source
    named in a continuation request.
-2. The repository adapter's explicitly declared source.
+2. The skill adapter's explicitly declared source.
 3. Exactly one active plan, when the user requests continuation of active work.
-4. A connected tracker item only when repository mapping and selection are
-   unambiguous and the user requested its execution.
+4. A tracker item in the `ready` role only when the tracker adapter's mapping
+   and the selection are unambiguous and the user requested its execution.
 5. Otherwise ask which source to execute.
 
 Read applicable `AGENTS.md`, the selected source/linked standards, and
-`docs/README.md` and `docs/contributing.md` when present.
-Read `.codex/execute-tasks.md` if present.
-An adapter supplies project-specific inputs; it is optional and not a second
-runner. Use required exploration tools before broad source reads.
+`docs/README.md` and `docs/contributing.md` when present. Read the skill adapter
+`.codex/execute-tasks.md` if present. It supplies project-specific inputs; it is
+optional and not a second runner. Use required exploration tools before broad
+source reads.
 
 Check accepted scope, dependencies, unresolved decisions, and existing execution
 authority. Folder/status alone grants no approval. An explicit request to
@@ -48,9 +54,10 @@ Missing categories are `Not applicable` or `Unavailable`, never `PASS`;
 if a required check cannot be run, record the gap and do not claim full
 verification. Honor stronger repository gates.
 
-Resolve tracker mapping from repository guidance, the selected issue, and the
-Linear operating skill when available. A connected workspace alone does not
-configure this repository. Otherwise record `No tracker`.
+Record the tracker from the tracker adapter. If the repository documents a
+remote tracker but has no tracker adapter, continue authorized local work and
+mention `/setup-tracker` only when a tracker update is due: ask the user to run
+it rather than guessing statuses. With no tracker at all, record `No tracker`.
 
 Execution cadence and commit permission are separate:
 
@@ -82,9 +89,10 @@ Update navigation/index links in the same unit. Preparation or a blocked
 dependency does not activate a plan. Resume an active plan in place.
 Do not execute a completed historical plan without selecting new work.
 
-At actual start, apply the executed issue's active-state transition only when
-tracker synchronization is authorized. Read actual workflow states and gates;
-do not start directly from raw Triage or update a container on behalf of a child.
+At actual start, `transition` the executed item to `in-progress` only when
+tracker updates are authorized. Check its role and gates first: work starts
+from `ready` or from an item the user explicitly selected, never from `intake`.
+Do not update a container on behalf of a child.
 
 Repository-specific paths override `planned/active/done/`. Do not migrate a
 repository's `backlog/archive/` layout incidentally.
@@ -152,8 +160,8 @@ Before moving an active plan to `done/`:
 1. Confirm its implementation tasks and required technical checks are complete.
 2. Reconcile affected living docs: architecture/contracts, operating instructions,
    vendor knowledge, and current product/status docs at their canonical homes.
-3. Extract durable knowledge to those homes. Route independent unfinished work
-   through Linear intake when available or `docs/backlog.md` in fallback mode;
+3. Extract durable knowledge to those homes. `capture` independent unfinished
+   work in the tracker, or use the tracker adapter's fallback during an outage;
    do not quietly drop unfinished in-scope criteria.
 4. Leave measurements, rejected hypotheses, alternatives, deviations, and
    execution history in the historical plan. Preserve predecessor documents
@@ -162,15 +170,17 @@ Before moving an active plan to `done/`:
    and affected area. Reconcile navigation links affected by the move.
 
 Plan closure and issue acceptance are separate facts. A technically verified
-implementation plan can be in `done/` while the issue is `In Review` for
+implementation plan can be in `done/` while the item is in `in-review` for
 separate delivery/user acceptance. Record that boundary explicitly. If the plan
 itself includes a required unperformed manual criterion, keep it active.
 
-Use the configured tracker workflow for the executed issue and actual evidence;
-the Linear skill owns state semantics. Do not mark an issue Done before its
-required acceptance, or update an epic/Project because one unit finished.
-An outage does not block independent local work: record pending sync without
-claiming remote transitions or building a permanent parallel tracker.
+When tracker updates are authorized, `comment` the actual evidence on the
+executed item and `transition` it to `in-review` as the tracker adapter maps it.
+Only the user's acceptance moves it to `done`; never use `done` in place of
+`in-review`, or update a parent or container because one unit finished. An
+outage does not block independent local work: follow the tracker adapter's
+fallback without claiming remote transitions or building a permanent parallel
+tracker.
 
 ## Reporting
 
