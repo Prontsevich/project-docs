@@ -1,6 +1,6 @@
 {
   "name": "prontsevich-skills",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Agent skills for planning, executing, and documenting changes in software projects.",
   "author": {
     "name": "Sergey Prontsevich",
@@ -17,6 +17,7 @@
   "skills": [
     "./skills/change",
     "./skills/execute-tasks",
-    "./skills/project-docs"
+    "./skills/project-docs",
+    "./skills/setup-tracker"
   ]
 }

@@ -100,7 +100,9 @@ empty boilerplate. Templates are optional and justified by recurring work.
 
 Determine the current authoritative tracker without replacing it. Linear,
 Plane, ClickUp, and repository-only tracking all fit the model. Configuring or
-changing a tracker is a separate task.
+changing a tracker is a separate task. When `docs/agents/tracker.md` exists, it
+is the one home for tracker operations and the role-to-status mapping;
+`docs/contributing.md` keeps the policy and links to it.
 
 With an available configured tracker, active scope, priority, dependencies,
 acceptance, and lifecycle stay there. Repository documents hold durable technical

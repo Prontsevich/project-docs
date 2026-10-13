@@ -12,12 +12,22 @@ Agent Skills format.
   bounded steps with independent review, verification, and documentation closure.
 - [project-docs](skills/project-docs/SKILL.md): set up, audit, and maintain
   project documentation with one authoritative home per fact.
+- [setup-tracker](skills/setup-tracker/SKILL.md): run once per repository to
+  write `docs/agents/tracker.md`, which maps work-tracking roles and operations
+  to Linear, Plane, ClickUp, local Markdown, or another tracker. User-invoked
+  only.
 
 The skills form one flow, `change` → `execute-tasks` → `project-docs`, and each
 also works on its own.
 
-`change` and `execute-tasks` currently assume Linear for work tracking.
-Tracker adapters for Linear, Plane, ClickUp, and local Markdown are planned.
+`change` and `execute-tasks` currently assume Linear for work tracking; moving
+them onto the tracker adapter is the next step.
+
+## Acknowledgements
+
+The `setup-tracker` process and role-mapping table are adapted from
+[mattpocock/skills](https://github.com/mattpocock/skills) (MIT, Copyright (c)
+2026 Matt Pocock).
 
 ## Install
 
