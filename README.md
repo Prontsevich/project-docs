@@ -1,78 +1,50 @@
-# Project Documentation
+# Prontsevich Skills
 
-An agent skill for setting up and maintaining project documentation in new and
-existing repositories. It establishes one authoritative home per fact, separates
-living contracts from historical records, and keeps documentation useful as work
-ships.
+Agent skills for planning, executing, and documenting changes in software
+projects. They work in Claude Code, Codex, and other harnesses that support the
+Agent Skills format.
 
-## What it does
+## Skills
 
-- **Bootstrap:** establish the smallest useful documentation system for a new project.
-- **Adapt:** reconcile an existing system while preserving useful conventions and history.
-- **Audit:** inspect the system and propose a mapping without editing files.
-- **Maintain:** route new knowledge, update current contracts, and close documentation gaps.
+- [change](skills/change/SKILL.md): understand a requested change, investigate
+  code and docs, and prepare the smallest implementation-ready approach.
+- [execute-tasks](skills/execute-tasks/SKILL.md): execute an approved plan in
+  bounded steps with independent review, verification, and documentation closure.
+- [project-docs](skills/project-docs/SKILL.md): set up, audit, and maintain
+  project documentation with one authoritative home per fact.
 
-The model was developed across several real projects of different sizes. The
-skill is self-contained; it does not depend on any particular project or tracker.
+The skills form one flow, `change` → `execute-tasks` → `project-docs`, and each
+also works on its own.
 
-## Documentation model
-
-Each maintained fact has one canonical home. Implementation-bound knowledge is
-versioned with the code. Living documents describe current contracts; dated
-designs, plans, and investigations preserve intent and evidence. Agent entrypoints
-contain cross-session rules and pointers to narrower knowledge.
-
-Plans use the repository's existing execution states. Technical closure includes
-updating living docs, extracting reusable findings, recording verification, and
-indexing the outcome. Technical completion remains separate from tracker acceptance.
-
-Active tasks stay in the configured tracker. A repository backlog is authoritative
-when no tracker is configured, or serves as a pending-synchronization fallback
-during an outage. No particular tracker, documentation repository, or application
-framework is required.
-
-The skill preserves equivalent existing layouts, including living capability
-registries named `specs/` and plan states named `archive` or `completed`. It creates
-additional folders and templates only when actual content or recurring work needs
-them. Its default communication language is Russian; new repository artifacts
-are English.
+`change` and `execute-tasks` currently assume Linear for work tracking.
+Tracker adapters for Linear, Plane, ClickUp, and local Markdown are planned.
 
 ## Install
 
-Clone this repository into the agent's skill directory. For a new Codex installation
-using its default skill location:
+### Claude Code
 
 ```sh
-mkdir -p "$HOME/.codex/skills"
-git clone https://github.com/Prontsevich/project-docs.git \
-  "$HOME/.codex/skills/project-docs"
+claude plugin marketplace add Prontsevich/prontsevich-skills
+claude plugin install prontsevich-skills@prontsevich
 ```
 
-If `project-docs` is already installed, compare its contents before replacing it.
-For another agent, use its supported skill directory; the entrypoint is `SKILL.md`.
+### Codex
 
-## Use
-
-```text
-$project-docs Set up documentation for this new project.
-$project-docs Adapt this repository's documentation to the model.
-$project-docs Audit documentation and propose improvements without editing files.
-$project-docs Reconcile documentation after this completed change.
+```sh
+codex plugin marketplace add Prontsevich/prontsevich-skills
+codex plugin add prontsevich-skills@prontsevich
 ```
 
-## Files
+### Other agents
 
-- [SKILL.md](SKILL.md): workflow, routing, and verification.
-- [Documentation model](references/documentation-model.md): ownership, placement,
-  naming, tracker boundaries, and plan lifecycle.
-- [Migration guidance](references/migration.md): adapting existing material without
-  losing unique knowledge, history, or references.
-- [Agent metadata](agents/openai.yaml): display and invocation metadata.
+Copy a folder from `skills/` into the agent's skill directory. The entrypoint
+of each skill is its `SKILL.md`.
 
-## Validation
+## Development
 
-The skill was checked for valid metadata and local references, then independently
-exercised against a new project and an existing documentation fixture. The existing
-fixture retained its living capability contract, archived evidence, tracker
-ownership, and unreconciled legacy task. No real application or external tracker
-was modified during that validation.
+Clone the repository and run `scripts/link-skills.sh` to symlink every skill
+into `~/.claude/skills` and `~/.codex/skills`. A `git pull` then updates the
+linked skills. Set `SKILL_LINK_DESTS` to link into other directories. The script
+leaves an existing real directory in place and reports it.
+
+Maintenance rules for this repository are in [AGENTS.md](AGENTS.md).

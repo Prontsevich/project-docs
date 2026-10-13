@@ -1,0 +1,4 @@
+interface:
+  display_name: "Change"
+  short_description: "Plan repository changes with proportionate artifacts"
+  default_prompt: "Use $change to understand this requested change and prepare the smallest implementation-ready approach."

@@ -1,0 +1,21 @@
+{
+  "name": "prontsevich",
+  "owner": {
+    "name": "Sergey Prontsevich",
+    "url": "https://github.com/Prontsevich"
+  },
+  "description": "Sergey Prontsevich's agent skills as an installable plugin.",
+  "plugins": [
+    {
+      "name": "prontsevich-skills",
+      "source": "./",
+      "description": "Agent skills for planning, executing, and documenting changes in software projects.",
+      "category": "engineering",
+      "keywords": [
+        "planning",
+        "execution",
+        "documentation"
+      ]
+    }
+  ]
+}

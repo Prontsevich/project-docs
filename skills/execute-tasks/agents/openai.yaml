@@ -1,0 +1,4 @@
+interface:
+  display_name: "Execute Tasks"
+  short_description: "Execute verified batches with explicit commit policy"
+  default_prompt: "Use $execute-tasks to implement this approved batch, record actual verification, and reconcile documentation under my commit instructions."
