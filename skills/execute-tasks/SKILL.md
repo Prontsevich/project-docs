@@ -155,19 +155,16 @@ to the plan without rewriting historical design as current architecture.
 
 ## Close the plan and hand off acceptance
 
-Before moving an active plan to `done/`:
-
-1. Confirm its implementation tasks and required technical checks are complete.
-2. Reconcile affected living docs: architecture/contracts, operating instructions,
-   vendor knowledge, and current product/status docs at their canonical homes.
-3. Extract durable knowledge to those homes. `capture` independent unfinished
-   work in the tracker, or use the tracker adapter's fallback during an outage;
-   do not quietly drop unfinished in-scope criteria.
-4. Leave measurements, rejected hypotheses, alternatives, deviations, and
-   execution history in the historical plan. Preserve predecessor documents
-   with a superseded reference when needed rather than deleting them.
-5. Move the plan and update `docs/plans/README.md` with a working link, outcome,
-   and affected area. Reconcile navigation links affected by the move.
+This skill decides when a plan is ready to close; `project-docs` defines how.
+When every implementation unit is complete and the required technical checks
+have passed with recorded evidence, call the Skill tool with `project-docs` to
+close the plan with its closure checklist. The repository's
+`docs/contributing.md` rules take precedence. Route unfinished work found
+during closure with `capture`, or the tracker adapter's fallback during an
+outage. If `project-docs` is unavailable, close the plan by
+`docs/contributing.md` and state the substitution. Without either, reconcile the
+living docs this work made stale, record verification, move the plan, update
+its index, and report that no full closure checklist was available.
 
 Plan closure and issue acceptance are separate facts. A technically verified
 implementation plan can be in `done/` while the item is in `in-review` for

@@ -18,8 +18,8 @@ do not translate existing documents merely to normalize the layout.
 - **Adapt:** bring an existing documentation system into the model, preserving
   useful conventions and history.
 - **Audit:** report gaps and a concrete proposed mapping without changing files.
-- **Maintain:** route new knowledge, reconcile current docs, or close a specific
-  documentation gap after a change.
+- **Maintain:** route new knowledge, reconcile current docs, close a specific
+  documentation gap after a change, or close a completed plan.
 
 An explicit request to set up or adapt documentation authorizes scoped local
 documentation changes. A request to inspect or discuss a possible approach is an
@@ -98,24 +98,18 @@ counts, a tracker status, or work occurring in another worktree.
 ## Maintain and close
 
 Update affected living documents alongside verified changes. Keep proposed
-behavior in its design/plan until implementation is established. On technical
-plan closure:
+behavior in its design/plan until implementation is established.
 
-1. Reconcile living contracts made stale by the work.
-2. Extract durable reusable knowledge to its canonical home; route outstanding
-   work to the tracker or local fallback without losing scope.
-3. Preserve measurements, rejected alternatives, and investigation evidence in
-   the historical work record, clearly distinguishing observations and proposals.
-4. Record actual verification and limitations, move the plan to the existing
-   completed state, and update its index with scope and outcome.
-
-Technical plan completion can coexist with pending QA, deployment, or user
-acceptance in the tracker. Never manufacture completion or accept the work on
-the user's behalf.
+This skill owns the definition of plan closure. To close a plan, apply
+[Closing a plan](references/documentation-model.md#closing-a-plan) under the
+repository's `docs/contributing.md` rules. Technical closure can coexist with
+pending QA, deployment, or user acceptance in the tracker. Never manufacture
+completion or accept the work on the user's behalf.
 
 If available and relevant, `change` authors design and execution artifacts and
-`execute-tasks` delivers them; this skill owns documentation organization and
-reconciliation, not their entire workflows. It remains usable without those skills.
+`execute-tasks` delivers them and decides when a plan is ready to close; this
+skill owns documentation organization, reconciliation, and the closure checklist,
+not their entire workflows. It remains usable without those skills.
 
 ## Verify and deliver
 

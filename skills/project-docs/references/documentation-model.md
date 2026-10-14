@@ -149,16 +149,37 @@ Do not promote another worktree's plan locally; preserve state with its branch.
 Completed checkboxes alone do not prove closure, and all-empty checkboxes alone
 do not prove no investigation has started. Verify the record and actual evidence.
 
-Plans are completed after the scoped technical outcome is verified and the
-living-document reconciliation and knowledge extraction are complete. Keep
-outstanding technical scope visible rather than checking it off. Remaining user
-acceptance, deployment, or functional QA must be explicitly identified and stay
-in the tracker; technical plan closure does not mark the Issue Done.
-
 Index every plan in its real state with a working link and a short scope/outcome.
-Preserve historical results and failed hypotheses. Move newly reusable findings
-to a living home and leave a pointer from the historical record. A completed
-plan should not be the only place the next implementer can learn a current rule.
+
+### Closing a plan
+
+This checklist is the one definition of plan closure. Whoever closes a plan,
+`execute-tasks` or a person, applies it; the repository's `docs/contributing.md`
+rules take precedence where they differ.
+
+1. Confirm the implementation tasks and required technical checks are complete,
+   with actual evidence. Keep outstanding technical scope visible rather than
+   checking it off. A plan with a required manual criterion not yet performed
+   stays active.
+2. Reconcile living documents made stale by the work: architecture and
+   contracts, operating instructions, vendor knowledge, and current product or
+   status documents, each at its canonical home.
+3. Extract newly reusable findings to living homes and leave a pointer from the
+   plan. A completed plan should not be the only place the next implementer can
+   learn a current rule.
+4. Route independent unfinished work to the tracker, or to the local fallback
+   during an outage. Do not quietly drop unfinished in-scope criteria.
+5. Keep measurements, rejected hypotheses and alternatives, deviations, and
+   execution history in the plan, distinguishing observations from proposals.
+   Preserve a superseded predecessor document with a reference to its successor
+   rather than deleting it.
+6. Record actual verification and limitations, move the plan to the completed
+   state, and update the plan index with a working link, outcome, and affected
+   area. Repair navigation links affected by the move.
+
+Technical closure is not acceptance. Remaining user acceptance, deployment, or
+functional QA is named explicitly and stays in the tracker; closing a plan
+never marks its tracker item done.
 
 ## Established variations
 

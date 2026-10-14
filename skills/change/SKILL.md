@@ -130,8 +130,9 @@ continue into execution without a redundant approval stop. When only planning
 was requested, stop after delivering the proposal.
 
 `execute-tasks` owns activation, implementation, progress, review evidence,
-living-document reconciliation, closure, and indexing. This skill does not
-perform a second completion ritual.
+and the decision to close; `project-docs` defines plan closure, including
+living-document reconciliation and indexing. This skill does not perform a
+second completion ritual.
 
 ## Constraints
 
