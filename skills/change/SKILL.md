@@ -8,23 +8,24 @@ description: Understand a requested change, investigate repository code and docs
 Own intent and technical planning: what changes, why, current behavior, impact,
 design choices, and executable work. Default to planning only. An explicit
 implementation request already grants the execution handoff for its scope;
-do not ask for the same approval again. Implementation belongs to
+proceed without asking for the same approval again. Implementation belongs to
 `execute-tasks` or the repository's direct workflow for small changes.
 
 ## Load context
 
 Resolve the repository root, branch, working tree, and applicable `AGENTS.md`.
 Read `docs/README.md` and `docs/contributing.md` when present, then the relevant
-living docs, standards, code, tests, and linked design material. Honor
-repository-required exploration tools such as graphify before broad code reads.
-Do not assume that a harness has loaded project rules for you.
+living docs, standards, code, tests, and linked design material. Follow the
+repository's code exploration rules before broad code reads. Read the project
+rules yourself; a harness may not have loaded them.
 
 Use existing repository templates and routing. Read the skill adapter
 `.codex/change.md` if it exists, or another one explicitly routed by repository
-guidance. A skill adapter is optional; do not create one just to run this skill.
+guidance. A skill adapter is optional; create one only on request, not as a
+side effect of running this skill.
 A capability registry is an optional living contract anchor, not a prerequisite.
-Do not invent a capability stub, templates, or a documentation hierarchy as
-incidental planning work.
+Planning works with the documentation structure that exists; a capability stub,
+templates, or a documentation hierarchy are separate work, not a side effect.
 
 ## Resolve the work source
 
@@ -83,9 +84,8 @@ A significant design may still have a small implementation; a mechanical
 migration may need a plan without a spec. Avoid a third proposal document when
 a spec and/or plan already carries the necessary context.
 
-Preserve repository layouts that differ from these defaults. Do not bulk
-migrate existing plans or reinterpret a living capability registry as historical
-design specs. Without a routing rule, use the defaults only for the artifacts
+Preserve repository layouts that differ from these defaults, including existing
+plans where they are and a living capability registry in its living role. Without a routing rule, use the defaults only for the artifacts
 this change actually needs.
 
 ## Author an executable handoff
@@ -111,12 +111,12 @@ approved, and an unstarted plan must not sit in `active/`.
 
 With a local backlog, reconcile its entry when a plan is created according to
 the tracker adapter, or local rules without one: link the plan from the entry,
-or retire the line in a queue-only backlog. Do not silently lose an unplanned
-remainder of the request.
+or retire the line in a queue-only backlog. Keep any unplanned remainder of
+the request visible in the backlog or the response.
 
-Do not update living contracts as though proposed behavior has shipped.
-Record proposed deltas in the spec/plan; the executor reconciles current docs
-after the implementation is verified. Historical specs remain historical.
+Living contracts describe shipped behavior. Record proposed deltas in the
+spec/plan; the executor reconciles current docs after the implementation is
+verified. Historical specs remain historical.
 
 ## Handoff and response
 
@@ -129,10 +129,10 @@ remaining gates to `execute-tasks`. When implementation was already requested,
 continue into execution without a redundant approval stop. When only planning
 was requested, stop after delivering the proposal.
 
-`execute-tasks` owns activation, implementation, progress, review evidence,
-and the decision to close; `project-docs` defines plan closure, including
-living-document reconciliation and indexing. This skill does not perform a
-second completion ritual.
+`execute-tasks` owns implementation, progress, review evidence, and the
+decisions to activate and close; `project-docs` defines plan activation and
+closure, including living-document reconciliation and indexing. This skill
+ends at the handoff, without a second completion ritual.
 
 ## Constraints
 

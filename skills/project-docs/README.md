@@ -10,7 +10,8 @@ ships.
 - **Bootstrap:** establish the smallest useful documentation system for a new project.
 - **Adapt:** reconcile an existing system while preserving useful conventions and history.
 - **Audit:** inspect the system and propose a mapping without editing files.
-- **Maintain:** route new knowledge, update current contracts, and close documentation gaps.
+- **Maintain:** route new knowledge, update current contracts, close documentation
+  gaps, and activate or close implementation plans.
 
 The model was developed across several real projects of different sizes. The
 skill is self-contained; it does not depend on any particular project or tracker.
@@ -34,8 +35,8 @@ framework is required.
 The skill preserves equivalent existing layouts, including living capability
 registries named `specs/` and plan states named `archive` or `completed`. It creates
 additional folders and templates only when actual content or recurring work needs
-them. Its default communication language is Russian; new repository artifacts
-are English.
+them. It talks to the user in the user's language; new repository artifacts
+are English unless the repository has chosen otherwise.
 
 ## Install
 
@@ -58,6 +59,8 @@ $project-docs Reconcile documentation after this completed change.
   naming, tracker boundaries, and plan lifecycle.
 - [Migration guidance](references/migration.md): adapting existing material without
   losing unique knowledge, history, or references.
+- [Examples](references/examples/): minimal shapes for `contributing.md`, a plan
+  index, and a closed plan.
 - [Agent metadata](agents/openai.yaml): display and invocation metadata.
 
 ## Validation

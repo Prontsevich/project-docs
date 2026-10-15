@@ -38,6 +38,7 @@ Do not indiscriminately split every small document.
 | Product purpose, scenarios, scope, decisions | Existing product pages, product docs repository, or an explicitly chosen local home | Usually living; date decision records |
 | Client requirements, commercial proposals, discovery evidence | Existing private client/product surface | Preserve source or dated agreement |
 | Measurements, refuted hypotheses, rejected alternatives | The investigation or execution record that produced them | Point-in-time |
+| Agent memory and conversation history | Never an authoritative home: promote a durable fact to its home in this table; memory may keep a pointer | Not maintained knowledge |
 
 Adapt locations to how readers use the project. Keep a feature-local contract
 next to code if that placement works; index it from the relevant entrypoint.
@@ -58,18 +59,23 @@ architecture encyclopedia. Use applicability to decide what stays inline:
 
 Agent-specific files should route to the same canonical rules where the host's
 loading semantics permit it. Preserve required host-specific directives and
-existing imports. Avoid copying the entire contract into every agent file.
+existing imports. Keep the contract in one file and route other agent files to it.
+When a project used with Claude Code keeps its shared rules in `AGENTS.md`,
+`CLAUDE.md` imports them with an `@AGENTS.md` line (`@../AGENTS.md` from
+`.claude/CLAUDE.md`) and holds only Claude-specific additions.
 No universal line budget is necessary; a project may set its own cleanup targets.
 
 ## Language and audience
 
-New code-repository artifacts are English, including long-term specs and plans.
-Russian is used for conversation with the user. Human-facing product pages,
-working guides, and client material may be Russian in the chosen external or
-separate product home; honor explicit local conventions and audience needs.
-Keep technical identifiers and commands in their exact form. Do not create
-parallel translations by default or translate historical client/source material
-as a migration side effect.
+New code-repository artifacts are English, including long-term specs and plans,
+unless the repository has chosen another language. Conversation with the user
+uses the user's language. Human-facing product pages, working guides, and client
+material may use their audience's language in the chosen external or separate
+product home; honor explicit local conventions and audience needs. Keep
+technical identifiers and commands in their exact form. By default keep one
+language version of each document and historical client/source material in its
+original language; a repository convention or an explicit request can add
+another version. Migration alone is no reason to translate.
 
 Product and technical audiences can use different surfaces without requiring
 two repositories. A separate documentation repository, product pages in the
@@ -139,17 +145,42 @@ Do not silently remove uncovered scope or do this to remote Issues.
 shaped work -> design if needed -> planned -> active -> done
 ```
 
+**Shaped work** has a clear outcome, scope, and acceptance, enough to plan or
+build against; in tracker terms it has left intake. A **consequential**
+decision is costly to reverse or becomes something other work builds on, such
+as a public contract, data model, architecture boundary, or integration choice.
+
 Small changes can omit both spec and plan. A consequential decision may need a
 spec without a multi-step plan; a mechanical migration may need a plan without
 a design spec.
 
-Folder state is technical execution, not permission. An unstarted plan must not
-be in `active/`. Transition it when work actually starts in this branch/worktree.
-Do not promote another worktree's plan locally; preserve state with its branch.
-Completed checkboxes alone do not prove closure, and all-empty checkboxes alone
-do not prove no investigation has started. Verify the record and actual evidence.
+Folder state is technical execution in this branch/worktree, not permission,
+approval, or tracker acceptance. A plan's state reflects work in this
+branch/worktree only; work in another worktree does not move the plan here,
+for activation or closure.
+Checkbox counts and tracker status are not evidence of plan state on their own:
+completed checkboxes do not prove closure, and all-empty checkboxes do not
+prove no investigation has started. Verify the record and actual evidence.
 
 Index every plan in its real state with a working link and a short scope/outcome.
+
+### Activating a plan
+
+This is the one definition of plan activation. Whoever starts implementation,
+`execute-tasks` or a person, applies it; the repository's `docs/contributing.md`
+rules take precedence where they differ.
+
+1. Activate immediately before the first implementation change in this
+   branch/worktree, after readiness checks. Preparation, investigation for
+   planning, or a blocked dependency leaves the plan in the planned state.
+2. Move the plan to the active state of the repository's layout
+   (`planned/` to `active/` by default) and update the plan index and affected
+   navigation links in the same change.
+3. Resume an already active plan in place. A plan active in another worktree
+   keeps its state on that branch; activate it locally only when its work
+   actually moves here.
+4. A completed plan stays completed. New work in the same area gets a new
+   plan or another selected source.
 
 ### Closing a plan
 
@@ -167,8 +198,10 @@ rules take precedence where they differ.
 3. Extract newly reusable findings to living homes and leave a pointer from the
    plan. A completed plan should not be the only place the next implementer can
    learn a current rule.
-4. Route independent unfinished work to the tracker, or to the local fallback
-   during an outage. Do not quietly drop unfinished in-scope criteria.
+4. Route independent unfinished work to the tracker when tracker writes are
+   authorized, or to the local fallback during an outage; otherwise list it in
+   the report as proposed follow-ups. Keep every unfinished in-scope criterion
+   visible.
 5. Keep measurements, rejected hypotheses and alternatives, deviations, and
    execution history in the plan, distinguishing observations from proposals.
    Preserve a superseded predecessor document with a reference to its successor

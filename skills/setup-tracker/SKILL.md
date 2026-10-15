@@ -91,7 +91,8 @@ Show the user drafts of:
 - A short `## Work tracking` pointer in the rules file chosen in step 1. If that
   section exists, update its tracker pointer in place and keep the rest; never
   append a duplicate. If neither `AGENTS.md` nor `CLAUDE.md` exists, ask which
-  one to create. Never create the second one.
+  one to create. Never create the second one here; a `CLAUDE.md` that imports
+  `AGENTS.md` is set up by `project-docs`.
 - When `docs/contributing.md` describes tracker operations, reduce that part to
   the policy and a link to the adapter, so the operations have one home.
 

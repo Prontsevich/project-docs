@@ -6,8 +6,9 @@ description: Execute an approved implementation plan, issue, or explicit task ba
 # Execute Tasks
 
 Own execution and evidence from ready work through verified delivery. Consume
-technical planning from `change` or an equivalent source; do not redesign the
-product, perform intake, or invent work to fill a batch.
+technical planning from `change` or an equivalent source and execute the
+selected work as planned; product design, intake, and new scope belong to the
+planning side, and a batch holds only the work that was selected.
 
 ## Load inputs and repository guidance
 
@@ -35,21 +36,23 @@ source reads.
 
 Check accepted scope, dependencies, unresolved decisions, and existing execution
 authority. Folder/status alone grants no approval. An explicit request to
-execute the selected scope is sufficient; do not request the same permission
-again. If new design decisions are needed, return that bounded question to
+execute the selected scope is sufficient; proceed without asking for the same
+permission again. If new design decisions are needed, return that bounded question to
 `change` or the user while continuing independent authorized work.
 
 ## Set scope, checks, and commit policy
 
 Inspect Git status, relevant existing diffs, and untracked paths. Preserve
 pre-existing changes. Map the source into coherent ordered units with outcome,
-allowed paths, dependencies, acceptance, and verification. Do not create a
-sub-issue or commit for every checkbox.
+allowed paths, dependencies, acceptance, and verification. A unit groups
+related checkboxes; a single checkbox does not warrant its own sub-issue or
+commit.
 
 Derive a stable verification baseline from repository guidance, CI, and actual
 toolchain scripts. Use it to choose proportional checks per unit and batch:
 focused checks while iterating, required broader checks at their stated gate.
-Do not require an unrelated application build for a documentation-only unit.
+A documentation-only unit needs documentation checks, not an unrelated
+application build.
 Missing categories are `Not applicable` or `Unavailable`, never `PASS`;
 if a required check cannot be run, record the gap and do not claim full
 verification. Honor stronger repository gates.
@@ -58,6 +61,20 @@ Record the tracker from the tracker adapter. If the repository documents a
 remote tracker but has no tracker adapter, continue authorized local work and
 mention `/setup-tracker` only when a tracker update is due: ask the user to run
 it rather than guessing statuses. With no tracker at all, record `No tracker`.
+
+Tracker write authority follows from the request:
+
+- A request to execute a tracker item, or a plan linked to one, authorizes
+  three writes on that executed item: `transition` to `in-progress` at actual
+  start, `comment` with evidence, and `transition` to `in-review` at handoff.
+  When the linked item is a container, this covers the child items actually
+  executed, not the container, unless the container is itself the one
+  bounded deliverable.
+- `done` belongs to the user's acceptance. Move an item to `done` only on the
+  user's explicit instruction for that item.
+- Any other write, such as `capture` of new items or edits to other items or
+  containers, needs its own request or a standing rule in the tracker adapter.
+- Stricter rules in the tracker adapter or repository guidance take precedence.
 
 Execution cadence and commit permission are separate:
 
@@ -73,8 +90,8 @@ Execution cadence and commit permission are separate:
   require their own authority.
 
 When commits are authorized, use repository message/splitting conventions,
-or an English Conventional Commit describing the change. Do not put ephemeral
-phase numbers or private tracker metadata in the subject. Isolate task changes
+or an English Conventional Commit describing the change. Keep ephemeral phase
+numbers and private tracker metadata out of the subject. Isolate task changes
 from pre-existing changes; if a commit cannot be safely isolated, leave it
 pending rather than staging unrelated work.
 
@@ -83,31 +100,32 @@ available delegation/review tooling, and next actual boundary.
 
 ## Activate and track
 
-For the default layout, move `docs/plans/planned/<name>.md` to `active/`
-immediately before the first implementation starts, after readiness checks.
-Update navigation/index links in the same unit. Preparation or a blocked
-dependency does not activate a plan. Resume an active plan in place.
-Do not execute a completed historical plan without selecting new work.
+This skill decides when implementation actually starts; `project-docs` defines
+how a plan is activated. Immediately before the first implementation unit,
+after readiness checks, call the Skill tool with `project-docs` to activate the
+plan with its activation rules, keeping the repository's own plan layout. If
+`project-docs` is unavailable, activate by `docs/contributing.md`, or move the
+plan to the active state and update its index, and state the substitution.
+A completed plan is not an executable source; ask for or select new work.
 
-At actual start, `transition` the executed item to `in-progress` only when
-tracker updates are authorized. Check its role and gates first: work starts
+At actual start, `transition` the executed item to `in-progress` under the
+tracker write authority above. Check its role and gates first: work starts
 from `ready` or from an item the user explicitly selected, never from `intake`.
-Do not update a container on behalf of a child.
-
-Repository-specific paths override `planned/active/done/`. Do not migrate a
-repository's `backlog/archive/` layout incidentally.
+Update each item for its own work; a container keeps its own state when one
+child starts.
 
 Parent-owned plan checkboxes and execution notes are persistent progress.
-Use the harness plan tool as a view when available; do not require a second
+Use the harness plan tool as a view when available; it is not a second
 persistent checklist. Track at most one active implementation unit.
 
 Plan order governs combined sources; match tracker items by stable identity.
 A container is not an implementation unit unless its scope is genuinely one
-bounded deliverable. Do not create remote phase tasks automatically.
+bounded deliverable. Create remote phase tasks only on request.
 
 On continuation, reconstruct state from the selected source, persistent
-progress, Git diff, evidence, and tracker. Do not rediscover the source from
-recent commits or infer completion from a worker's report.
+progress, Git diff, evidence, and tracker. The source stays the one already
+selected; recent commits and worker reports are claims to verify, not proof
+of completion.
 
 ## Implement, review, and verify each unit
 
@@ -149,8 +167,8 @@ After implementation:
 7. Record result and remaining work; handle commits under the selected policy.
    Stage only explicit task-owned paths when authorized, never `git add .`.
 
-Update affected living docs alongside implementation. Do not wait for the
-last unit to repair a known contradiction. Append execution evidence/deviations
+Update affected living docs alongside implementation. Repair a known
+contradiction in the unit that exposes it, not at the end of the batch. Append execution evidence/deviations
 to the plan without rewriting historical design as current architecture.
 
 ## Close the plan and hand off acceptance
@@ -160,8 +178,9 @@ When every implementation unit is complete and the required technical checks
 have passed with recorded evidence, call the Skill tool with `project-docs` to
 close the plan with its closure checklist. The repository's
 `docs/contributing.md` rules take precedence. Route unfinished work found
-during closure with `capture`, or the tracker adapter's fallback during an
-outage. If `project-docs` is unavailable, close the plan by
+during closure with `capture` when the request or a standing adapter rule
+authorizes it, or with the tracker adapter's fallback during an outage;
+otherwise list it in the report as proposed captures. If `project-docs` is unavailable, close the plan by
 `docs/contributing.md` and state the substitution. Without either, reconcile the
 living docs this work made stale, record verification, move the plan, update
 its index, and report that no full closure checklist was available.
@@ -171,13 +190,12 @@ implementation plan can be in `done/` while the item is in `in-review` for
 separate delivery/user acceptance. Record that boundary explicitly. If the plan
 itself includes a required unperformed manual criterion, keep it active.
 
-When tracker updates are authorized, `comment` the actual evidence on the
+Under the tracker write authority above, `comment` the actual evidence on the
 executed item and `transition` it to `in-review` as the tracker adapter maps it.
-Only the user's acceptance moves it to `done`; never use `done` in place of
-`in-review`, or update a parent or container because one unit finished. An
-outage does not block independent local work: follow the tracker adapter's
-fallback without claiming remote transitions or building a permanent parallel
-tracker.
+Leave `done` to the user's acceptance, and leave a parent or container in its
+state when one unit finishes. An outage does not block independent local work:
+follow the tracker adapter's fallback without claiming remote transitions or
+building a permanent parallel tracker.
 
 ## Reporting
 
