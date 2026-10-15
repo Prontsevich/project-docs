@@ -60,9 +60,13 @@ architecture encyclopedia. Use applicability to decide what stays inline:
 Agent-specific files should route to the same canonical rules where the host's
 loading semantics permit it. Preserve required host-specific directives and
 existing imports. Keep the contract in one file and route other agent files to it.
-When a project used with Claude Code keeps its shared rules in `AGENTS.md`,
-`CLAUDE.md` imports them with an `@AGENTS.md` line (`@../AGENTS.md` from
-`.claude/CLAUDE.md`) and holds only Claude-specific additions.
+Claude Code reads `AGENTS.md` as project instructions only while no `CLAUDE.md`
+exists in the working directory or above it. With shared rules in `AGENTS.md`,
+add a `CLAUDE.md` only for Claude-specific rules. Any `CLAUDE.md` on that path,
+including `.claude/CLAUDE.md`, imports the shared rules with an `@AGENTS.md`
+line (`@../AGENTS.md` from `.claude/CLAUDE.md`); otherwise Claude Code skips
+`AGENTS.md`. A nested `CLAUDE.md`, such as one a framework generates in a
+subfolder, hides the root `AGENTS.md` from sessions started below it.
 No universal line budget is necessary; a project may set its own cleanup targets.
 
 ## Language and audience

@@ -65,8 +65,8 @@ them.
 Use the model's defaults only where no useful convention exists. A typical
 bootstrap establishes a root quickstart, `docs/README.md` navigation,
 `docs/contributing.md` placement and maintenance rules, and concise documentation
-routing in `AGENTS.md` or the existing agent entrypoint. When the project has a
-`CLAUDE.md` or the user works in it with Claude Code, that `CLAUDE.md` imports
+routing in `AGENTS.md` or the existing agent entrypoint. Create a `CLAUDE.md`
+only when the project needs Claude-specific rules; an existing one imports
 `AGENTS.md` instead of copying it.
 [Examples](references/examples/) show minimal shapes for these files; adapt
 them to the project rather than copying them.
